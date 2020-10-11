@@ -1,0 +1,66 @@
+{% extends 'todoapp/base.html' %}{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow banner">
+                <div clas="banner-text">
+                     <h1>TODO</h1>
+                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="shadow card">
+                <div class="card-body">
+                <h4 class="card-title"><b>Add Task</b></h4>
+                </div>
+            </div>
+        <br>
+         <form class="p-5 shadow" method="POST">
+             {% csrf_token %}
+
+            <!-- this is for name input -->
+            <div class="form-group">
+                <input class="form-control" type="text" name="name" id="name" placeholder="Enter Task"/>
+            </div>
+
+            <!-- this is for priority input -->
+            <div class="form-group">
+                <input class="form-control" type="text" name="priority" id="priority" placeholder="Enter Task priority ex. 1 or 2 or 3 etc" />
+            </div>
+
+            <!-- this is for datetime -->
+            <div class="form-group">
+                <input class="form-control" type="date" name="date" id="date"/>
+            </div>
+
+            <!-- this is Submit button -->
+            <input class="btn btn-success" type="submit" name="" id="" />
+         </form>
+
+    </div>
+        <div class="col-md-6">
+            <div class="shadow card">
+                <div class="card-body">
+                <h4 class="card-title"><b>Task To Complete</b></h4>
+                </div>
+            </div>
+            <br>
+        {% for task in task_list%}
+            <div class="shadow card">
+                <div class="card-body">
+                <h5 class="card-title"><b>Task Name:  {{ task.name}}</b></h5>
+                <p><b>priority:  {{ task.priority}}</b></p>
+                <p><b>Date:  {{ task.date }}</b></p>
+                <a class="btn btn-danger" href="{% url 'delete' task.id %}">Done</a>
+                <a class="btn btn-warning" href="{% url 'update' task.id %}">Update</a>
+            </div>
+        </div>
+      <br />
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

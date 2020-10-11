@@ -1,0 +1,9 @@
+{% extends 'todoapp/base.html' %}
+{% block body  %}
+     <form method="POST">
+        {% csrf_token %}
+        <h3>do you really want to complete task? </h3>
+        <button type="submit"> Conform </button>
+
+    </form>
+{% endblock  %}
